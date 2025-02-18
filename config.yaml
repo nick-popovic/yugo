@@ -1,0 +1,156 @@
+package_managers:
+  darwin:  # macOS
+    - name: brew
+      check_cmd: brew -v
+
+  windows:
+    - name: choco
+      check_cmd: choco -v
+    - name: scoop
+      check_cmd: scoop --version
+    - name: winget
+      check_cmd: winget -v
+
+  linux:
+    - name: apt
+      check_cmd: apt --version
+    - name: pacman
+      check_cmd: pacman --version
+
+programs:
+
+  go:
+    description: "Go Programming Language"
+    tags: ["development", "language"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y golang"
+        pacman: "sudo pacman -Syu go"
+      darwin:
+        brew: "brew install go"
+      windows:
+        winget: "winget install golang.go"
+
+  google-chrome:
+    description: "Google Chrome Web Browser"
+    tags: ["browser"]
+    installs:
+      linux:
+        apt: >
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub |
+          sudo apt-key add - &&
+          sudo sh -c 'echo "deb [arch=amd64]
+          http://dl.google.com/linux/chrome/deb/ stable main"
+          >> /etc/apt/sources.list.d/google-chrome.list' &&
+          sudo apt update &&
+          sudo apt install -y google-chrome-stable
+        pacman: "sudo pacman -Syu google-chrome"
+      darwin:
+        brew: "brew install google-chrome"
+      windows:
+        winget: "winget install Google.Chrome"
+
+  firefox:
+    description: "Mozilla Firefox Web Browser"
+    tags: ["browser"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y firefox"
+        pacman: "sudo pacman -Syu firefox"
+      darwin:
+        brew: "brew install firefox"
+      windows:
+        winget: "winget install Mozilla.Firefox"
+
+  neovim:
+    description: "Neovim Text Editor"
+    tags: ["editor", "development"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y neovim"
+        pacman: "sudo pacman -Syu neovim"
+      darwin:
+        brew: "brew install neovim"
+      windows:
+        winget: "winget install Neovim.Neovim"
+
+  vscode:
+    description: "Visual Studio Code"
+    tags: ["editor", "development"]
+    installs:
+      linux:
+        apt: >
+          wget -qO- https://packages.microsoft.com/keys/microsoft.asc |
+          gpg --dearmor > packages.microsoft.gpg &&
+          sudo install -o root -g root -m 644 packages.microsoft.gpg
+          /usr/share/keyrings/ &&
+          sudo sh -c 'echo "deb [arch=amd64]
+          https://packages.microsoft.com/repos/vscode stable main"
+          > /etc/apt/sources.list.d/vscode.list' &&
+          sudo apt update &&
+          sudo apt install -y code
+        pacman: "sudo pacman -Syu code"
+      darwin:
+        brew: "brew install --cask visual-studio-code"
+      windows:
+        winget: "winget install Microsoft.VisualStudioCode"
+
+  tree:
+    description: "Tree Command to display directories"
+    tags: ["utility"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y tree"
+        pacman: "sudo pacman -Syu tree"
+      darwin:
+        brew: "brew install tree"
+      windows:
+        winget: "winget install gnuwin32.tree"
+
+  neofetch:
+    description: "Neofetch system info tool"
+    tags: ["utility"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y neofetch"
+        pacman: "sudo pacman -Syu neofetch"
+      darwin:
+        brew: "brew install neofetch"
+      windows:
+        winget: "winget install neofetch"
+
+  fzf:
+    description: "fzf - A command-line fuzzy finder"
+    tags: ["utility", "search"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y fzf"
+        pacman: "sudo pacman -Syu fzf"
+      darwin:
+        brew: "brew install fzf"
+      windows:
+        winget: "winget install fzf"
+
+  yazi:
+    description: "yazi - A blazing fast terminal file manager"
+    tags: ["utility", "file manager"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y yazi"
+        pacman: "sudo pacman -Syu yazi"
+      darwin:
+        brew: "brew install yazi"
+      windows:
+        winget: "winget install yazi"
+
+  gh:
+    description: "GitHub CLI"
+    tags: ["utility", "development"]
+    installs:
+      linux:
+        apt: "sudo apt update; sudo apt install -y gh"
+        pacman: "sudo pacman -Syu gh"
+      darwin:
+        brew: "brew install gh"
+      windows:
+        winget: "winget install GitHub.cli"
