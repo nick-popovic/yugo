@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strconv"
 
@@ -26,7 +27,11 @@ func main() {
 	// Should we run in accessible mode?
 	accessible, _ := strconv.ParseBool(os.Getenv("ACCESSIBLE"))
 
-	data, err := ioutil.ReadFile("config.yaml")
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatalf("error getting home directory: %v", err)
+	}
+	data, err := ioutil.ReadFile(filepath.Join(homeDir, ".config", "yugo", "config.yaml"))
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
