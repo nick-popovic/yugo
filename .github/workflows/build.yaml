@@ -9,6 +9,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write  # Add this line for release creation permissions
+
 jobs:
   build-standard:
     name: Build for ${{ matrix.os }}
@@ -89,14 +92,16 @@ jobs:
     name: Create Release
     needs: [build-standard, build-mac-arm]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     
     steps:
     - name: Debug Info
       run: |
         echo "Event name: ${{ github.event_name }}"
         echo "Ref: ${{ github.ref }}"
+        echo "Base ref: ${{ github.base_ref }}"
         echo "Is tag? ${{ startsWith(github.ref, 'refs/tags/') }}"
+        echo "GitHub ref type: ${{ github.ref_type }}"
       
     - name: Checkout code
       uses: actions/checkout@v3
