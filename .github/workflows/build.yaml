@@ -90,6 +90,12 @@ jobs:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     
     steps:
+    - name: Debug Info
+      run: |
+        echo "Event name: ${{ github.event_name }}"
+        echo "Ref: ${{ github.ref }}"
+        echo "Is tag? ${{ startsWith(github.ref, 'refs/tags/') }}"
+      
     - name: Checkout code
       uses: actions/checkout@v3
       
